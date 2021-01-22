@@ -1,0 +1,160 @@
+{% extends "layout.html" %}
+{% block content%}
+    <body id="page-top">
+        <!-- Masthead-->
+        <header class="masthead">
+            <div class="container d-flex h-100 align-items-center">
+                <div class="mx-auto text-center">
+                    <h1 class="mx-auto my-0 text-uppercase">Lending Rupee</h1>
+                    <h2 class="text-white-50 mx-auto mt-2 mb-5">Now predicting your loan is easy & simple.</h2>
+                    <a class="btn waves-effect btn-start js-scroll-trigger" href="#predict">Get Started</a>
+                </div>
+            </div>
+        </header>
+        <!-- About-->
+        <div class="about-section text-center" id = "about">
+            <section class="p-md-3 mx-md-5 text-lg-left">
+              <h2 class="font-weight-bold text-white" style="text-align: center;">About</h2><br><br>
+              <div class="row text-center d-flex justify-content-center">
+                <div class="col-lg-4 col-md-6 mb-lg-0 mb-5 ml-auto mr-auto">
+                <i class="fas fa-chart-line text-white fa-9x mb-4"></i>
+                  <h4 class="text-white mb-4">Data Analysis</h4>
+                  <p class="text-white-50 text-center" style = "text-align:left;">
+                    * Size: 2.0GB<br>
+                    * Shape: 22,60,701 Rows & 151 Columns<br>
+                    * Data Source: Kaggle<br>
+                  </p>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-lg-0 mb-5">
+                    <i class="fa fa-wrench text-white fa-9x mb-4"></i>
+                  <h4 class="text-white mb-4">Tools</h4>
+                  <p class="text-white-50 text-center" style = "text-align:left;">
+                    * EMI Calculator<br>
+                    * Inflation Calculator<br>
+                  </p>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-md-0 mb-5">
+                  <i class="fas fa-landmark text-white fa-9x mb-4"></i>
+                  <h4 class="text-white mb-4">Prediction</h4>
+                  <p class="text-white-50 text-center" style = "text-align:center;">
+                    * Get your Interest Rate, Grade, Sub Grade based on the CIBIL Score provided.<br>
+                    * Get your loan approval chances by providing few necessary informations.<br>
+                  </p>
+                </div>
+              </div>
+            </section>
+          </div>
+
+        <!-- Predict-->>
+        <div class="container pt-5 my-5 hoverable" id = "predict">
+            <section class="p-md-3 mx-md-5">
+              <div class="row d-flex justify-content-center">
+                <div class="col-md-6 text-center text-black">
+                  <h2 class="text-black font-weight-bold pb-4">Prediction</h2><br><br><br><br>
+                  <i class="fas fa-rupee-sign text-black fa-6x mb-2"></i>
+                  <p class="grey-text pt-4">
+                    Are you looking for a Individual Loan or a Joint Loan?
+                  </p>
+                </div>
+              </div>
+              <hr class="mx-5">
+              <div class="row text-center">
+                <div class="col-md-6 mb-5">
+                  <div class="mt-3">
+                    <a class="btn btn-predict" href="{{url_for('individual')}}">Individual</a>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-5">
+                  <div class="mt-3">
+                    <a class="btn btn-predict" href="{{url_for('joint')}}">Joint</a>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>       
+        
+        
+{% endblock content%}
+
+{% block team%}
+
+<!-- Team Page -->
+<section class="team-section text-center" id = "team">
+  <div class="container px-4">
+    <div class="row text-center text-white">
+      <div class="col-lg-9 mx-auto">
+        <h2 class="font-weight-bold">Team</h2>
+          <p class="lead font-weight mb-3 amber-text">None of us is smart as you!</p>
+          <hr style="border-color: var(--yellow);
+          border-width: 0.25rem;
+          width: 10rem;" class="mt-0 mr-auto ml-auto" />
+      </div>
+    </div>
+  </div>
+  <!-- End -->
+
+
+<div class="container mt-2">
+  <div class="row text-center ">
+
+<!-- Team item -->
+<div class="col-xl-3 col-md-6 col-12 mb-5 team">
+    <div class="lime lighten-2 rounded shadow-sm py-5 px-4">
+      <img src="../static/img/ashutosh.jpg" alt="" width="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
+        <h5 class="mb-0 text-white">Ashutosh Sharma</h5><span class="small text-uppercase text-muted"></span>
+        <ul class="social mb-0 list-inline mt-3">
+            <li class="list-inline-item"><a href="https://www.linkedin.com/in/ashutosh-sharma-6a508a194" class="social-link" target="_blank_"><i class="fab fa-linkedin"></i></a></li>
+            <li class="list-inline-item"><a href="https://github.com/ashusharma07" class="social-link" target="_blank_"><i class="fab fa-github"></i></a></li>
+            <li class="list-inline-item"><a href="https://www.kaggle.com/ashutosh079" class="social-link" target="_blank_"><i class="fab fa-kaggle"></i></a></li>
+            <li class="list-inline-item"><a href="https://www.facebook.com/ashutosh.sharma.5851127" class="social-link" target="_blank_"><i class="fab fa-facebook"></i></a></li>
+        </ul>
+    </div>
+</div>
+<!-- End -->
+
+<!-- Team item -->
+<div class="col-xl-3 col-md-6 col-12 mb-5 team ">
+    <div class=" indigo lighten-3 rounded shadow-sm py-5 px-4"><img src="../static/img/sarthak.jpg" alt="" width="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
+        <h5 class="mb-0 text-white">Sarthak Sahu</h5><span class="small text-uppercase text-muted"></span>
+        <ul class="social mb-0 list-inline mt-3">
+            <li class="list-inline-item"><a href="https://www.linkedin.com/in/sarthak-sahu-a54874193/" class="social-link" target="_blank_"><i class="fab fa-linkedin"></i></a></li>
+            <li class="list-inline-item"><a href="https://github.com/rogueui" class="social-link" target="_blank_"><i class="fab fa-github"></i></a></li>
+            <li class="list-inline-item"><a href="https://www.kaggle.com/rogueui" class="social-link" target="_blank_"><i class="fab fa-kaggle"></i></a></li>
+            <li class="list-inline-item"><a href="https://www.facebook.com/sarthak.sahu.72" class="social-link" target="_blank_"><i class="fab fa-facebook"></i></a></li>
+        </ul>
+        <br>
+    </div>
+</div><!-- End -->
+
+<!-- Team item -->
+<div class="col-xl-3 col-md-6 col-12 mb-5 team ">
+    <div class="pink lighten-3 rounded shadow-sm py-5 px-4"><img src="../static/img/aryan.JPG" alt="" width="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
+        <h5 class="mb-0 text-white">Aryan Mishra</h5><span class="small text-uppercase text-muted"></span>
+        <ul class="social mb-0 list-inline mt-3">
+            <li class="list-inline-item"><a href="https://www.linkedin.com/in/aryanmishra2310/" class="social-link" target="_blank_"><i class="fab fa-linkedin"></i></a></li>
+            <li class="list-inline-item"><a href="https://github.com/aaryan-2310" class="social-link" target="_blank_"><i class=" fab fa-github"></i></a></li>
+            <li class="list-inline-item"><a href="https://www.kaggle.com/" class="social-link"target="_blank_"><i class="fab fa-kaggle"></i></a></li>
+        </ul>
+    </div>
+</div>
+<!-- End -->
+
+<!-- Team item -->
+<div class="col-xl-3 col-md-6 col-12 mb-5 team">
+    <div class=" blue lighten-3 rounded shadow-sm py-5 px-4"><img src="../static/img/saroj.jpg" alt="" width="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
+        <h5 class="mb-0 text-white">Saroj Gope</h5><span class="small text-uppercase text-muted"></span>
+        <ul class="social mb-0 list-inline mt-3">
+            <li class="list-inline-item "><a href="https://www.linkedin.com/in/saroj-shultz-44518119a/" class="social-link"target="_blank_"><i class="fab fa-linkedin"></i></a></li>
+            <li class="list-inline-item"><a href="https://github.com/Saroj1093425" class="social-link"target="_blank_"><i class=" fab fa-github"></i></a></li>
+            <li class="list-inline-item"><a href="https://www.kaggle.com/sarojkumargope" class="social-link"target="_blank_"><i class="  fab fa-kaggle"></i></a></li>
+            <li class="list-inline-item"><a href="https://www.facebook.com/saroj.kumargope.75/" class="social-link"target="_blank_"><i class=" fab fa-facebook"></i></a></li>
+        </ul>
+        <br>
+    </div>
+</div>
+<!-- End -->]
+</div>
+</section>
+
+
+{% endblock team %}

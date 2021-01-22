@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% if title%}
+    <title>{{ title }}</title>
+    {% else %}
+    <title>Loan Lending</title>
+    {% endif %}
+    <!-- Webpage Icon -->
+    <link rel="icon" type="image/x-icon" href="https://www.flaticon.com/svg/static/icons/svg/3104/3104993.svg"/>
+    <!-- Font Awesome icons (free version) -->
+    <!-- <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" crossorigin="anonymous"></script> -->
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+    <!-- Font Awesome -->
+    <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"> -->
+    <!-- <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" crossorigin="anonymous"></script> -->
+    <script src="https://kit.fontawesome.com/dd935e2cf5.js" crossorigin="anonymous"></script>
+    <!-- Bootstrap core CSS -->
+    <link href="{{ url_for('static',     filename='css/bootstrap.min.css') }}" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="{{ url_for('static',     filename='css/mdb.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static',     filename='css/nouislider.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static',     filename='css/style.css') }}">
+    <!-- <link rel="stylesheet" href="{{ url_for('static',     filename='css/spinkit.min.css') }}"> -->
+    <link rel="stylesheet" href="{{ url_for('static',     filename='css/emi-style.css') }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
+
+</head>
+
+<body>
+    <!-- <div class="loader-wrapper m-0 p-0">
+        <div class="sk-chase loader">
+            <div class="sk-chase-dot"></div>
+            <div class="sk-chase-dot"></div>
+            <div class="sk-chase-dot"></div>
+            <div class="sk-chase-dot"></div>
+            <div class="sk-chase-dot"></div>
+            <div class="sk-chase-dot"></div>
+        </div>
+        <div class="m-0 p-0" style="top: 95vh;
+        left: 44vw; position: absolute;"><h4 class="text-white m-0 p-0">Please wait</h4></div>
+        
+
+    </div> -->
+
+    <div class="loader-wrapper">    
+        <div class="wrapper">
+            <div class="circle"></div>
+            <div class="circle"></div>
+            <div class="circle"></div>
+            <div class="shadow"></div>
+            <div class="shadow"></div>
+            <div class="shadow"></div>
+            <span>Loading</span>
+        </div>
+    </div>
+        
+    
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top z-depth-0 " id="mainNav">
+        <div class="container">
+            <a class="navbar-brand js-scroll-trigger" href="{{ url_for('home')}}">
+                <img src="https://www.flaticon.com/svg/static/icons/svg/3104/3104993.svg" height="40px" width="90px">
+            </a>
+            <button class="navbar-toggler navbar-toggler-right first-button" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <div class="animated-icon1"><span></span><span></span><span></span></div>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    {% if title != "Home - Lending Rupee"%}
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ url_for('home')}}">Home</a></li>
+                    {% endif %}
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#predict">Predict</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#tools">Tools</a></li>
+                    {% if title == "Home - Lending Rupee"%}
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#team">Team</a></li>
+                    {% endif %}
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#signup">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    {% block content %}
+    {% endblock content %}
+
+            <!-- Tools-->
+            <div class="container pt-5 my-5 hoverable" id = "tools">
+
+
+                <!--Section: Content-->
+                <section class="p-md-5 mx-md-5 text-center dark-grey-text">
+             
+                  <h2 class="font-weight-bold mb-5">Tools</h2>
+                  <br>
+                  <!--Grid row-->
+                  <div class="row">
+            
+                    <!--Grid column-->
+                    {% if title != "EMI Calculator - Lending Rupee"%}
+                    <div class="col-md-6 mb-4 mb-md-0  ml-auto mr-auto">
+            
+                      <i class="fas fa-percentage fa-6x"></i>
+                      <br>
+                      <br>
+                      <h4 class="font-weight-bold my-3">EMI Calculator</h4>
+            
+                      <p class="text-muted p-md-5"> EMI or equated monthly installment, as the name suggests, 
+                      is one part of the equally divided monthly outgoes to clear off an outstanding loan within a stipulated time frame.</p>
+            
+                      <a class="btn button_cont btn-md" href="{{url_for('emi_calculator')}}" role="button">Calculate</a>
+      
+                    </div>
+                    {% endif %}
+                    <!--Grid column-->
+            
+                    <!--Grid column-->
+                    {% if title != "Inflation Calculator - Lending Rupee"%}
+                    <div class="col-md-6 mb-4 mb-md-0 ml-auto mr-auto">
+            
+                      <i class="fas fa-coins fa-6x"></i>
+                      <br>
+                      <br>
+                      <h4 class="font-weight-bold my-3">Inflation Calculator</h4>
+            
+                      <p class="text-muted p-md-5">Inflation refers to the rise in the prices of most goods and services of daily or common use,
+                      such as food, clothing, housing, recreation, transport, consumer staples, etc.</p>
+      
+                      <a class="btn button_cont btn-md" href="{{url_for('inflation_calculator')}}" role="button">Calculate</a>
+      
+                    </div>
+                    {% endif %}
+
+                    <!--Grid column-->
+            
+                  </div>
+                  <!--Grid row-->
+            
+            
+                </section>
+                <!--Section: Content-->
+            
+            
+              </div>  
+            {% block team %}
+            {% endblock team %}
+              <!-- Signup-->
+        <section class="signup-section" id="signup">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-10 col-lg-8 mx-auto text-center">
+                        <i class="far fa-paper-plane fa-2x mb-2 text-white"></i>
+                                    <h2 class="text-white text-capitalize mb-5">Feedback </h2>
+                        <form class="form-inline d-flex">
+                            <input class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0" id="inputEmail" type="text" placeholder="Enter your comment..." />
+                            <button class="btn btn-start mx-auto" type="submit">Send</button>
+                            <p class="text-capitlize text-white mx-5 my-3">We will really update ourselves from your valuable feedback.</p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section> 
+
+    <!-- Contact-->
+    <section class="contact-section bg-black" id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-3 mb-md-0">
+                    <div class="card py-4 h-100">
+                        <div class="card-body text-center">
+                            <a  href="" class="icons-md li-ic text-black-50"><i class="fas fa-map-marked-alt mb-2"></i></a>
+                            <h4 class="text-uppercase m-0">Address</h4>
+                            <hr class="my-4" />
+                            <div class="small text-black-50">GIET University,Gobriguda</div>
+                            <div class="small text-black-50">Gunupur</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3 mb-md-0">
+                    <div class="card py-4 h-100 ">
+                        <div class="card-body text-center">
+                            <a  href="" class="icons-md li-ic text-black-50"><i class="fas fa-envelope text-black mb-2"></i></a>
+                            <h4 class="text-uppercase m-0">Email</h4>
+                            <hr class="my-4" />
+                            <div class="small text-black-50">enquiry@giet.edu</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3 mb-md-0">
+                    <div class="card py-4 h-100">
+                        <div class="card-body text-center">
+                            <a  href="" class="icons-md li-ic text-black-50"><i class="fas fa-mobile-alt text-black mb-2"></i></a>
+                            <h4 class="text-uppercase m-0">Phone</h4>
+                            <hr class="my-4" />
+                            <div class="small text-black-50">+ 91 (637) 023-1308</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- Footer-->
+    <footer class="footer black small text-center text-white-50">
+        <div class="container">Copyright © Lending Rupee 2020</div>
+    </footer>
+   
+    
+    
+    
+    
+    
+    <!-- JavaScript -->
+
+    <script type="text/javascript" src="{{ url_for('static',     filename='js/nouislider.min.js') }}"></script>
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <!-- JQuery -->
+    <script type="text/javascript" src="{{ url_for('static',     filename='js/jquery-3.5.1.min.js') }}"></script>
+    
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+    
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Third party plugin JS-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+    
+    <!-- Core theme JS-->
+    <script src="{{ url_for('static',     filename='js/scripts.js') }}"></script>
+   
+</body>
+</html>

@@ -1,0 +1,154 @@
+{% extends "layout.html" %}
+{% block content%}
+    <section class="header joint-header" id="about">
+          <div class="container">            
+              <h1 class="h1-responsive text-center font-weight-lighter text-white">Joint Loan Approval Prediction</h1>
+          </div>
+          <div class="container my-auto">
+            <div class="row ">
+                <div class="col-md-6">
+                    <p class="lead">It is also important to understand the Loan APR concept before using 
+                      these calculators. Banks charge more than just the interest rate on loans. When obtaining 
+                      a loan, lenders charge various kinds of non-refundable fees including processing fees and 
+                      documentation charges. The loan APR factors in these one-time costs associated with borrowing. 
+                      Loan APR, which is expressed as a yearly percentage rate, represents the true cost of your 
+                      loan after taking into account the loan interest rate plus the fees & charges that you pay 
+                      when getting a loan. Loan APR is a more complete measure that reflects the net effective 
+                      cost of your loan on a yearly basis. For the banks, it represents their internal rate of 
+                      return (IRR) on the loan.</p>
+                </div>
+                <div class="col-md-6 text-center mx-auto my-auto">
+                        <a class="btn btn-lg peach-gradient js-scroll-trigger" href="#predict">Predict</a>
+                </div>
+              </div>
+          </div>
+          
+    </section>
+    <div class="feature joint-feature color-block" id = "predict">
+        <h1 class="text-white text-uppercase font-weight-lighter">Enter the details </h1>
+        
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 col-sm-6">
+                  <form class="md-form" action="{{ url_for('joint') }}" method="POST">
+
+                   <!-- <div class="md-form">
+                        <input type="number" minlength="3" maxlength="3" min="300" max="999" id="form1" class="form-control">
+                        <label for="form1">CIBIL Score</label>
+                      </div>-->
+                      <div class="d-flex justify-content-center my-4">
+                        <span class="font-weight-bold amber-text ml-2">CIBIL Score1</span>
+                        <br>
+                        <div class="w-75">
+                          <input type="range" class="custom-range" name="cibil_score" id="cibil_score" min="650" max="999" required>
+                        </div>
+                        <span class="font-weight-bold text-white ml-2 cibil_score_span"></span>
+                      </div>
+
+                      <div class="d-flex justify-content-center my-4">
+                        <span class="font-weight-bold amber-text ml-2">CIBIL Score2</span>
+                        <br>
+                        <div class="w-75">
+                          <input type="range" class="custom-range" name="cibil_score2" id="cibil_score2" min="650" max="999" required>
+                        </div>
+                        <span class="font-weight-bold text-white ml-2 cibil_score2_span"></span>
+                      </div>
+                    
+                      
+                      <p class="font-weight-bold ml-5 p-0 amber-text">No of Mortgage Account</p>
+                      <div class="d-flex justify-content-center my-4">
+                        <div class="w-75">
+                          <input type="range" name="mort_acc" class="custom-range mb-2" id="mortAcc" min="0" max="50" required>
+                        </div>
+                        <span class="font-weight-bold text-white ml-2 mort-acc-range"></span>
+                      </div>
+                   
+                      
+                      <select class="browser-default custom-select amber-text elegant-color mySelect" name="term" required>
+                        <option selected>Term</option>
+                        <option value="36">36 Months</option>
+                        <option value="60">60 Months</option>
+                      </select>
+                      </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="md-form input-with-pre-icon">
+                      <i class="fas fa-rupee-sign input-prefix amber-text fa-lg"></i>
+                        <input type="number" id="currEmi" name="currEmi" class="form-control amber-text" min="0"  onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : (event.charCode >= 48 || event.charCode == 46) && event.charCode <=57" required>
+                        <label for="currEmi">Current Monthly Installement</label>
+                      </div>
+                
+                      <select class="browser-default custom-select amber-text elegant-color mySelect" name="home_ownership" required>
+                        <option selected>Home Ownership</option>
+                        <option value="MORTGAGE">Mortgage</option>
+                        <option value="OWN">Own</option>
+                        <option value="RENT">Rent</option>
+                        <option value="NONE">None</option>
+                        <option value="OTHER">Other</option>
+                        <option value="ANY">Any</option>
+                      </select>
+                    
+                      
+                      <div class="md-form input-with-pre-icon">
+                        <i class="fas fa-rupee-sign input-prefix amber-text fa-lg"></i>
+                        <input type="number" id="AnnualInc" name="annual_inc" class="form-control amber-text" min="0" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : (event.charCode >= 48 || event.charCode == 46) && event.charCode <=57" required>
+                        <label for="AnnualInc">Annual Income</label>
+                      </div>
+                      <div class="md-form input-with-pre-icon">
+                        <i class="fas fa-rupee-sign input-prefix amber-text fa-lg"></i>
+                        <input type="number" id="AnnualInc2" name="sec_annual_inc" class="form-control amber-text" min="0" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : (event.charCode >= 48 || event.charCode == 46) && event.charCode <=57" required>
+                        <label for="AnnualInc2">Annual Income 2</label>
+                      </div>
+                      </div>
+                      
+
+                <div class="col-md-4 col-sm-6">
+                    <div class="md-form input-with-pre-icon">
+                      <i class="fas fa-exclamation input-prefix amber-text fa-lg"></i>
+                        <input type="number" id="credEnq" name="inq_last_6mths" class="form-control amber-text" min="0" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <=57" required>
+                        <label for="credEnq">Credit Enq. in  last six months</label>
+                      </div>
+                                                            
+                      <div class="md-form input-with-pre-icon">
+                        <i class="fas fa-rupee-sign input-prefix amber-text fa-lg"></i>
+                        <input type="number" id="loanAmount" name="loan_amnt" class="form-control amber-text" min="0" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : (event.charCode >= 48 || event.charCode == 46) && event.charCode <=57" required>
+                        <label for="loanAmount">Loan Amount</label>
+                      </div>
+                      
+                      <div class="md-form input-with-pre-icon">
+                        <i class="fas fa-percentage input-prefix amber-text fa-lg"></i>
+                        <input type="number" id="credUsed" name="revol_util" class="form-control amber-text" min="0" max="200" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : (event.charCode >= 48 || event.charCode == 46) && event.charCode <=57" required>
+                        <label for="credUsed"> Credit Utilization Rate</label>
+                      </div>
+                   
+                    <div class="md-form input-with-pre-icon">
+                      <i class="fas fa-rupee-sign input-prefix amber-text fa-lg"></i>
+                        <input type="number" id="CurrBalance" name="total_bal_il" class="form-control amber-text" min="0" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : (event.charCode >= 48 || event.charCode == 46) && event.charCode <=57" required>
+                        <label for="CurrBalance"> Curr. Balance Owed on instll. Account</label>
+                      </div>
+                    </div>
+                    
+                    <div class="col-12 d-flex justify-content-center">
+                      <button type="submit" class="btn btn-predict">Predict</button>
+                    </div>
+                  </form>
+              </div>
+                   
+            </div>
+    </div>
+            
+    <section class="hoverable p-2 m-4 rounded ">
+      <div class="text-container text-black" align="center">
+        {% if result %}
+        {% for variable, value in original_input.items() %}
+        <br><b>{{ variable }}</b> : {{ value }}
+        {% endfor %}
+        <br>
+        <br> Loan Decision:
+        <p style="font-size:50px">{{ result }}</p>
+        {% endif %}
+        </div>
+    </section>
+    
+    
+    
+    {% endblock content%}

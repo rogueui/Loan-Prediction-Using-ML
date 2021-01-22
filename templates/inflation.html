@@ -1,0 +1,127 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<!-- Central Modal Medium Success -->
+<div class="modal fade" id="centralModalSuccess" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+aria-hidden="true">
+<div class="modal-dialog modal-notify modal-warning" role="document">
+  <!--Content-->
+  <div class="modal-content">
+    <!--Header-->
+    <div class="modal-header text-center">
+      <p class="heading lead">Calculated Inflation Price</p>
+
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true" class="white-text">&times;</span>
+      </button>
+    </div>
+
+    <!--Body-->
+    <div class="modal-body">
+      <div class="text-center">
+        <i class="fas fa-rupee-sign fa-4x animated rotateIn"></i>
+        <br> <br> <br>
+        <!-- <span class="font-weight-bold">Principal Amount: ₹</span> <span id="prin"></span>
+        <br>
+        <span class="font-weight-bold">Start Year:</span> <span id="stYear"></span>
+        <br>
+        <span class="font-weight-bold">End Year:</span> <span id="enYear"></span>
+        <br> -->
+        <p class=" font-weight-bold">
+
+          ₹<span id="prin"></span> <span>in</span> <span id="stYear"></span> <span>is</span> <span id='endPrice'></span> <span>in</span> <span id="enYear"></span>
+
+        </p>
+        <!-- <span class="font-weight-bold">End Price: </span><span id='endPrice'></span> -->
+      </div>
+    </div>
+
+    <!--Footer-->
+    <div class="modal-footer justify-content-center">
+      
+      <a type="button" class="btn btn-warning waves-effect" data-dismiss="modal">OK</a>
+    </div>
+  </div>
+  <!--/.Content-->
+</div>
+</div>
+<!-- Central Modal Medium Success-->
+
+<section class="header inflation-header" id="about">
+    <div class="container">            
+        <h1 class="h1-responsive text-center font-weight-lighter text-white">Inflation Calculator</h1>
+    </div>
+    <div class="container my-auto">
+      <div class="row">
+          <div class="col-md-6">
+              <p class="lead">Inflation is defined as a general increase in the prices of goods 
+                and services, and a fall in the purchasing value of money. Inflation can be artificial
+                 in that the authority, such as a central bank, king, or government, can control the 
+                 supply of the money in circulation. If additional money is added into an economy, each 
+                 unit of money in circulation will be worth less. The inflation rate itself is generally 
+                 conveyed as a percentage increase in prices over 12 months. Most developed nations try 
+                 to sustain an inflation rate between 2-3% through fiscal and monetary policy.</p>
+          </div>
+          <div class="col-md-6 text-center mx-auto my-auto">
+                  <a class="btn btn-lg peach-gradient js-scroll-trigger" href="#predict">Predict</a>
+          </div>
+        </div>
+    </div>
+    
+</section>
+<section class="feature inflation-feature color-block" id = "predict">
+    <h1 class="text-white text-uppercase font-weight-lighter">Enter the details </h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-md- ml-auto mr-auto">
+                <div class="d-flex justify-content-center my-4">
+                  <span class="font-weight-bold amber-text ml-2">Start Year</span>
+                  <br>
+                  <div class="w-75">
+                    <input type="range" class="custom-range" name="start" id="startYear" min="1960" max="2019">
+                  </div>
+                  <span class="font-weight-bold text-white ml-2 startYearValue"></span>
+                </div>
+              
+                
+                <div class="d-flex justify-content-center my-4">
+                  <span class="font-weight-bold amber-text ml-2">End Year</span>
+                  <br>
+                  <div class="w-75">
+                    <input type="range" class="custom-range" name="end" id="endYear" min="1960" max="2019">
+                  </div>
+                  <span class="font-weight-bold text-white ml-2 endYearValue"></span>
+                </div>
+             
+                
+                <div class="md-form input-with-pre-icon">
+                  <i class="fas fa-rupee-sign input-prefix amber-text fa-lg"></i>
+                  <input type="number" id="principalAmount" class="form-control" required onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <=57" required>
+                  <label for="principalAmount">Principal Amount</label>
+                </div>
+                  
+                <div class="ml-5">
+                  <button type='submit' class="btn btn-predict waves-effect z-depth-0" data-toggle="modal" id='calc' data-target="#centralModalSuccess">Predict</button>
+                </div>
+                
+                
+            </div>
+                </div>
+                {% if errorMsg: %}
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                  {{ errorMsg }}
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                {% endif %}
+                </div>
+               
+</section> 
+<script>
+        
+
+</script>  
+
+
+{% endblock content %}

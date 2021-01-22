@@ -1,0 +1,190 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+    
+
+
+h1{
+    text-align: center;
+    color: blue;
+    
+}
+
+
+#loan-container{
+    text-align:left;
+    max-width: 1200px;
+    margin:20px auto;
+    box-sizing: border-box;
+    font-family: Roboto,Arial,sans-serif;
+    color: rgb(255, 255, 255);
+    
+    
+}
+
+.box-pane{
+    border-radius: 12px;
+    background-color: rgba(121, 120, 122, 0.466);
+    padding:25px;
+    box-sizing: border-box;
+    min-height:570px;
+    
+}
+
+#info-pane{
+    float:left;
+    width:35%;
+}
+
+#graph-pane{
+    float:right;
+    width:63%;
+}
+
+.heading-title{
+    font-size:1.35em;
+    margin-bottom:15px;
+}
+
+#repayment-total{
+    float:left;
+    width:48%;
+}
+
+#repayment-cycle{
+    width:48%;
+    float:right;
+    text-align:right;
+}
+
+.row-input{
+    margin-bottom:20px;
+}
+
+.row-input label{
+    padding:5px 0;
+    display:block;
+}
+
+.row-input input, .row-input select{
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 9px 15px 10px;
+    outline: none;
+    opacity: 1 !important;
+    border-radius:5px;
+    font-size:1em;
+}
+
+
+  
+ 
+.input-wrap{
+    position:relative;
+}
+
+.currency-code{
+    position:absolute;
+    left:3px;
+    top:9px;
+}
+
+.percentage-code{
+    position:absolute;
+    left:75px;
+    top:9px;
+}
+
+.ul-buttons, .ul-buttons li{
+    margin:0;
+    padding:0;
+    list-style:none;
+}
+
+.ul-buttons li{
+    float:left;
+    background-color: #f1f1f1;
+    color: #6e6e6e;
+    padding: 8px 25px;
+    box-shadow: 0 2px 0 #ddd;
+    cursor: pointer;
+    font-size: 1rem;
+    line-height: 1.5;
+    width:33%;
+    float:left;
+    opacity: 1 !important;
+    box-sizing: border-box;
+    text-align:center;
+    border-left:solid 1px #ffffff;
+    border-right:solid 1px #ffffff;
+}
+
+.ul-buttons li:hover, .ul-buttons li.selected{
+    background-color: #008094;
+    box-shadow: 0 2px 0 #006575;
+    color:#ffffff;
+    opacity: 1 !important;
+}
+
+.note-text{
+    font-size:0.8em;
+    font-style:italic;
+    padding-top:5px;
+}
+
+.range-slider{
+    margin:15px 0 65px 0;
+}
+
+.noUi-value{
+    margin-top:4px;
+    font-size:1em;
+}
+
+.short-input{
+    width:60px;
+}
+
+.bold{
+    font-weight:normal;
+}
+
+.loan-value{
+    font-size:1.3em;
+    font-weight:bold;
+}
+
+.orange-text{
+    color: #f56a00;
+}
+
+#graph-chart{
+    width:100%;
+    height:450px;
+}
+
+.clear{
+    clear:both;
+}
+
+/*.emi-p{
+    background-image: url(/loan-prediction-project/emi/images/emi-bg.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 97vh;
+    box-shadow:inset 0 0 0 2000px rgba(114, 155, 231, 0.3);
+
+}*/
+
+@media screen and (max-width: 992px) {
+    #info-pane, #graph-pane{
+        float:none;
+        width:100%;
+        margin-bottom:20px;
+    }
+    
+    .box-pane{
+        min-height:500px;
+    }
+}

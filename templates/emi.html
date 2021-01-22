@@ -1,0 +1,244 @@
+{% extends "layout.html" %}
+{% block content %}
+
+		<section class="header emi-header">
+			
+					<div class="container">            
+						<h1 class="h1-responsive text-center font-weight-lighter text-white">EMI Calculator</h1>
+					</div>
+					<div class="container my-auto">
+					  <div class="row">
+						  <div class="col-md-6">
+							  <p class="lead text-white">Equated Monthly Installment - EMI for short - is the 
+                                  amount payable every month to the bank or any other financial institution until the 
+                                  loan amount is fully paid off. It consists of the interest on loan as well as part of 
+                                  the principal amount to be repaid.</p>
+						  </div>
+						  <div class="col-md-6 text-center mx-auto my-auto">
+								  <a class="btn btn-lg peach-gradient js-scroll-trigger" href="#predict">Calculate</a>
+						  </div>
+						</div>
+					</div>
+		</section>
+		
+		<section class="emi-calculator" id="predict">
+			<h1 class="p-5 font-weight-bolder text-white"></h1>
+			<div id="loan-container">
+				<div id="info-pane" class="box-pane">
+					<div class="heading-title bold">Calculate Your Loan.</div>
+					<div class="row-input">
+						<label>How much would you like to borrow?</label>
+						<div class="input-wrap">
+							<div class="currency-code">$</div>
+							<input type="text" type="number" id="txtLoan" value="1000000"/>
+						</div>
+					</div>
+					<div class="row-input">
+						<label>Loan interest rate?</label>
+						<div class="input-wrap">
+							<div class="percentage-code">%</div>
+							<input type="text" type="number" id="txtInterest" value="8.99" maxlength="5" class="short-input"/>
+						</div>
+					</div>
+				
+					<div class="row-input">
+						<label>How many years would you like the loan for?</label>
+						<div id="yearRange" class="range-slider"></div>
+					</div>
+					<div class="row-input">
+						<label>How often would you like to make payments?</label>
+						<ul class="ul-buttons">
+							<li class="selected" data-value="1">Monthly</li>
+							<li data-value="2">Daily</li>
+							<li data-value="3">Weekly</li>
+						</ul>
+					</div>
+				</div>
+				<div id="graph-pane" class="box-pane">
+					<div id="repayment-total">
+						<div class="heading-title bold">Total interest</div>
+						<div id="repayment-total-value" class="loan-value">
+							₹<span id="interest-total">0</span> over <span class="orange-text"><span id="year-value">5</span> years</span>
+						</div>
+					</div> 
+					<div id="repayment-cycle">
+						<div class="heading-title bold">Payment would be</div>
+						<div id="repayment-cycle-value" class="loan-value">
+							₹<span id="repayment-value">0</span> per <span class="orange-text">Daily</span>
+						</div>
+					</div> 
+					
+					<div class="clear"></div>
+					<div id="graph-chart"></div>
+				</div>
+			</div>
+		</section>
+		<script>
+			    //initial variables
+				var loanYear = 20;
+                            var stepYear = 5;
+                            var maxLoanYear = 30;
+                            var paymentCycle = 1;
+                            var monthlyRepayment = 0;
+                            var monthlyInterest = 0;
+                            var amortData = [];
+                            
+                            //start up method
+                            $(function(){
+                                $(".ul-buttons li").click(function(){
+                                    $(".ul-buttons li").removeClass("selected");
+                                    $(this).addClass("selected");
+                                    paymentCycle = parseInt($(this).attr("data-value"));
+                                    calculateLoan();
+                                });
+                                
+                                //Add on blur event
+                                $("#txtLoan, #txtInterest").on("blur", function(){
+                                    //Perform a check if loan or interest value has been entered invalid value, if it is, set the default value
+                                    if(isNaN($("#txtLoan").val())) {
+                                        $("#txtLoan").val(1000000);
+                                    }
+                                    
+                                    if(isNaN($("#txtInterest").val())) {
+                                        $("#txtInterest").val(8.99);
+                                    }
+                                    calculateLoan();
+                                });
+                            });
+                            
+                            //create the noUiSlider
+                            var range = document.getElementById('yearRange');
+                            noUiSlider.create(range, {
+                                range: {
+                                    'min': 5,
+                                    'max': maxLoanYear
+                                },
+                                step: stepYear,
+                                start: [loanYear],
+                                margin: 300,
+                                connect: true,
+                                direction: 'ltr',
+                                orientation: 'horizontal',
+                                pips: {
+                                    mode: 'steps',
+                                    stepped: false,
+                                    density: 2
+                                }
+                            });
+                            
+                            //Add the change event to redraw the graph and calculate loan
+                            range.noUiSlider.on("change", function(value){
+                                loanYear = parseInt(value[0]);
+                                calculateLoan();
+                            });
+                            
+                            //Chart
+                            google.charts.load('current', {'packages':['corechart']});
+                            function drawChart() {
+                                //Hold the loan data array
+                                var loanData = [];
+                                
+                                var dt = new Date();
+                                var yearCounter = 1;
+                                
+                                //Add the graph header
+                                var headerData = ['Year', 'Interest', 'Interest & Principal', 'Balance'];
+                                loanData.push(headerData);
+                                
+                                for(var i = dt.getFullYear(); i < dt.getFullYear() + loanYear; i++){
+                                    loanData.push([i.toString(), getAmortData("interest", 12 * yearCounter), monthlyRepayment * 12 * yearCounter, getAmortData("balance", 12 * yearCounter)]);
+                                    yearCounter++;
+                                }
+                                
+                                var data = google.visualization.arrayToDataTable(loanData);
+                
+                                var options = {
+                                  title: 'Loan Chart',
+                                  hAxis: {title: 'Year',  titleTextStyle: {color: '#333'}},
+                                  vAxis: {minValue: 0},
+                                  pointsVisible: true
+                                };
+                
+                                var chart = new google.visualization.AreaChart(document.getElementById('graph-chart'));
+                                chart.draw(data, options);
+                            }
+                            
+                            //Get amortization data based on type and terms
+                            function getAmortData(dataType, terms){
+                                var dataValue = 0;
+                                switch(dataType){
+                                    case "interest":
+                                        for(var i = 0; i < terms; i++){
+                                            dataValue += parseFloat(amortData[i].Interest);
+                                        }
+                                        break;
+                                    case "balance":
+                                        dataValue = parseFloat(amortData[terms-1].Balance);
+                                        break;
+                                }
+                                return Math.round(dataValue);
+                            }
+                            
+                            //calculate function
+                            function calculateLoan(){
+                                $("#year-value").html(loanYear);
+                                var loanBorrow = parseFloat($("#txtLoan").val());
+                                var interestRate = parseFloat($("#txtInterest").val()) / 1200;
+                                var totalTerms = 12 * loanYear;
+                    
+                                //Monthly
+                                var schedulePayment = Math.round(loanBorrow * interestRate / (1 - (Math.pow(1/(1 + interestRate), totalTerms))));
+                                monthlyRepayment = schedulePayment;
+                                var totalInterestPay = totalTerms * schedulePayment;
+                                amort(loanBorrow, parseFloat($("#txtInterest").val())/100, totalTerms);
+                                
+                                switch(paymentCycle){
+                                    case 2:
+                                        //Fortnightly
+                                        //we multiple by 12 then divided by 52 then multiple by 2
+                                        schedulePayment = Math.round(((schedulePayment * 12) / 52) * 2);
+                                        break;
+                                    case 3:
+                                        //Weekly
+                                        //we multiple by 12 then divided by 52 
+                                        schedulePayment = Math.round((schedulePayment * 12) / 52);
+                                        break;
+                                }
+                                
+                                $("#repayment-value").html(schedulePayment);
+                                $("#interest-total").html(getAmortData("interest", totalTerms));
+                                monthlyInterest = (totalInterestPay - loanBorrow) / totalTerms;
+                                google.charts.setOnLoadCallback(drawChart);
+                            }
+                            
+                            calculateLoan();
+                            
+                            //function to calculate the amortization data
+                            function amort(balance, interestRate, terms)
+                            {
+                                amortData = [];
+                                
+                                //Calculate the per month interest rate
+                                var monthlyRate = interestRate/12;
+                                
+                                //Calculate the payment
+                                var payment = balance * (monthlyRate/(1-Math.pow(1+monthlyRate, -terms)));
+                                    
+                                for (var count = 0; count < terms; ++count)
+                                { 
+                                    var interest = balance * monthlyRate;
+                                    var monthlyPrincipal = payment - interest;
+                                    var amortInfo = {
+                                        Balance: balance.toFixed(2),
+                                        Interest: balance * monthlyRate,
+                                        MonthlyPrincipal: monthlyPrincipal
+                                    }
+                                    amortData.push(amortInfo);
+                                    balance = balance - monthlyPrincipal;		
+                                }
+                                
+                            }
+                        
+		</script>
+
+{% endblock content %}
